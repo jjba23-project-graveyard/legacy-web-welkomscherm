@@ -36,3 +36,7 @@ dev:
 
 fmt:
 	find . -maxdepth 4 -name "*.scm" -type f -exec guix style -f {} \;
+
+deploy: render
+	rm -rf /srv/http/jointhefreeworld.org/joe-web-welkomscherm
+	cp -rf dist /srv/http/jointhefreeworld.org/joe-web-welkomscherm
