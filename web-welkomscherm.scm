@@ -16,6 +16,7 @@
 ;; along with web-welkomscherm. If not, see <https://www.gnu.org/licenses/>.
 
 (use-modules (sxml simple))
+(load "./bookmarks.scm")
 
 (define* (web-welkomscherm-html-template #:key title body)
   `(html (head (title ,title)
@@ -39,18 +40,6 @@
          (body (@ (class "break-words bg-stone-900"))
                (div (@ (class "container mx-auto my-4"))
                     ,@body))))
-
-(define-public web-welkomscherm-bookmarks
-  `(("DuckDuckGo" . "https://duckduckgo.com/")
-    ("jointhefreeworld.org" . (("Home" . "https://jointhefreeworld.org/")
-                               ("Byggsteg" . "https://byggsteg.jointhefreeworld.org/")))
-    ("Guix Packages" . "https://packages.guix.gnu.org")
-    ("Reddit" . "https://reddit.com")
-    ("BoxIcons" . "https://github.com/atisawd/boxicons")
-    ("GNU G-Golf ref" . "https://www.gnu.org/software/g-golf/manual/g-golf.html")
-    ("Google" . (("Gmail" . "https://mail.google.com/")
-                 ("Photos" . "https://photos.google.com/")))
-    ))
 
 (define (rec-make-bookmark l)
   (cond
