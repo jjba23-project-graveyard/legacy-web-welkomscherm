@@ -41,25 +41,40 @@
                     ,@body))))
 
 (define-public web-welkomscherm-bookmarks
-  `(("Jointhefreeworld" . "https://jointhefreeworld.org/")
-    ("Byggsteg" . "https://byggsteg.jointhefreeworld.org/")
+  `(("jointhefreeworld.org" . (("Home" . "https://jointhefreeworld.org/")
+                               ("Byggsteg" . "https://byggsteg.jointhefreeworld.org/")))
     ("Guix Packages" . "https://packages.guix.gnu.org")
     ("Reddit" . "https://reddit.com")
     ("BoxIcons" . "https://github.com/atisawd/boxicons")
-    ("GNU G-Golf reference" . "https://www.gnu.org/software/g-golf/manual/g-golf.html")))
+    ("GNU G-Golf ref" . "https://www.gnu.org/software/g-golf/manual/g-golf.html")))
 
-(define (web-welkomscherm-main-body)
-  `((div (@ (class "flex flex-row flex-wrap gap-6 justify-center"))
-         ,(map (lambda (link)
-                 `(div (a (@ (class "")
-                             (href ,(cdr link)))
-                          ,(car link)))) web-welkomscherm-bookmarks))))
+(define (rec-make-bookmark l)
+  (cond
+   ((string? (cdr l))
+    `(div (@(class "bg-stone-100/75 p-2 h-min"))
+          (a (@ (class "")
+                (href ,(cdr l)))
+             ,(car l)))
+    )   
+   ((null? (cdr l)) `())
+   (else
+    `(div (@(class "flex flex-col gap-2 justify-center p-1 bg-stone-200/75"))
+          (span (@(class "text-sm font-bold")) ,(car l))
+          (div (@(class "flex flex-row flex-wrap gap-6 justify-center"))
+               ,(map (lambda(ll) (rec-make-bookmark ll)) (cdr l))
+               )))
+   )
+  )
+
+  (define (web-welkomscherm-main-body)
+    `((div (@ (class "flex flex-row flex-wrap gap-6 justify-center align-center items-center"))
+           ,(map (lambda (l) (rec-make-bookmark l)) web-welkomscherm-bookmarks))))
 
 (define (web-welkomscherm-page)
   (with-output-to-string (lambda ()
                            (sxml->xml (web-welkomscherm-html-template #:title
-                                       "*welkomscherm*"
-                                       #:body (web-welkomscherm-main-body))))))
+                                                                      "*welkomscherm*"
+                                                                      #:body (web-welkomscherm-main-body))))))
 
 (define (main args)
   (display args)
