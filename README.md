@@ -1,3 +1,0 @@
-# webwelkomscherm
-
-My browser dashboard
