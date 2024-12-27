@@ -45,6 +45,7 @@
   (cond
    ((string? (cdr l))
     `(div (@(class "bg-stone-700/75 p-2 h-min rounded-xl"))
+          (img (@(width 24) (height 24) (src ,(format #f "~a/favicon.ico" ,(cdr l)))))
           (a (@ (class "text-stone-200")
                 (href ,(cdr l)))
              ,(car l)))
