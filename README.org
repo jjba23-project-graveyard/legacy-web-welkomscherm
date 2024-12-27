@@ -1,3 +1,8 @@
 * web-welkomscherm
 
 My browser dashboard.
+
+
+** Project backlog
+
+*** TODO Automatically fetch icons from favourites so as to make things more visual (search less)
