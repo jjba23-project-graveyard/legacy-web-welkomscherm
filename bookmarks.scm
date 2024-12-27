@@ -2,6 +2,7 @@
   `(("DuckDuckGo" . "https://duckduckgo.com/")
     ("jointhefreeworld.org" . (("Home" . "https://jointhefreeworld.org/")
                                ("Byggsteg" . "https://byggsteg.jointhefreeworld.org/")))
+    
     ("Guix Pkgs" . "https://packages.guix.gnu.org")
     ("Reddit" . "https://reddit.com")
     ("BoxIcons" . "https://github.com/atisawd/boxicons")
