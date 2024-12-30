@@ -43,33 +43,33 @@
 
 (define (rec-make-bookmark l)
   (cond
-    ((string? (cdr l))
-     `(a (@ (href ,(cdr l)))
-         (div (@ (class
+   ((string? (cdr l))
+    `(a (@ (href ,(cdr l)))
+        (div (@ (class
                   "bg-stone-700/75 p-2 h-min rounded-xl flex flex-wrap flex-row gap-3 items-center justify-center"))
-              (div (object (@ (class "max-w-12 max-h-12")
-                              (type "image/x-icon")
-                              (loading "lazy")
-                              (onerror "this.style.display='none'")
-                              (data ,(format #f "~a/favicon.ico"
-                                             (cdr l)))) "")
-                   (img (@ (class "max-w-12 max-h-12")
-                           (loading "lazy")
-                           (onerror "this.style.display='none'")
-                           (src ,(format #f "~a/favicon-16x16.png"
-                                         (cdr l))))))
+             (div (object (@ (class "max-w-12 max-h-12")
+                             (type "image/x-icon")
+                             (loading "lazy")
+                             (onerror "this.style.display='none'")
+                             (data ,(format #f "~a/favicon.ico"
+                                            (cdr l)))) "")
+                  (img (@ (class "max-w-12 max-h-12")
+                          (loading "lazy")
+                          (onerror "this.style.display='none'")
+                          (src ,(format #f "~a/favicon-16x16.png"
+                                        (cdr l))))))
 
-              (small ,(car l)))))
-    ((null? (cdr l))
-     `())
-    (else `(div (@ (class
+             (small (@(class "text-white")) ,(car l)))))
+   ((null? (cdr l))
+    `())
+   (else `(div (@ (class
                     "flex flex-col gap-2 justify-center p-2 bg-stone-800/75 rounded-xl"))
-                (span (@ (class "text-xs font-bold text-stone-400"))
-                      ,(car l))
-                (div (@ (class "flex flex-row flex-wrap gap-4 justify-center"))
-                     ,(map (lambda (ll)
-                             (rec-make-bookmark ll))
-                           (cdr l)))))))
+               (span (@ (class "text-xs font-bold text-stone-400"))
+                     ,(car l))
+               (div (@ (class "flex flex-row flex-wrap gap-4 justify-center"))
+                    ,(map (lambda (ll)
+                            (rec-make-bookmark ll))
+                          (cdr l)))))))
 
 (define (web-welkomscherm-main-body)
   `((div (@ (class
