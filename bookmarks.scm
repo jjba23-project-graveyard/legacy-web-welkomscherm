@@ -20,5 +20,5 @@
     ("Torrents" ("bt4gprx" . "https://bt4gprx.com"))
     ("LocalDev" ("byggsteg" . "http://localhost:3000")
      ("lucidplan" . "http://localhost:50025/backlog/JOE")
-     ("byggsteg" . "http://localhost:3000"))))
+     ("wikimusic-ssr" . "http://127.0.0.1:6923/"))))
 
