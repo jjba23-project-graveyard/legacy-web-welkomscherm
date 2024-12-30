@@ -43,32 +43,45 @@
 
 (define (rec-make-bookmark l)
   (cond
-   ((string? (cdr l))
-    `(div (@(class "bg-stone-700/75 p-2 h-min rounded-xl"))
-          (img (@(width 24) (height 24) (src ,(format #f "~a/favicon.ico" ,(cdr l)))))
-          (a (@ (class "text-stone-200")
-                (href ,(cdr l)))
-             ,(car l)))
-    )   
-   ((null? (cdr l)) `())
-   (else
-    `(div (@(class "flex flex-col gap-2 justify-center p-2 bg-stone-800/75 rounded-xl"))
-          (span (@(class "text-xs font-bold text-stone-400")) ,(car l))
-          (div (@(class "flex flex-row flex-wrap gap-4 justify-center"))
-               ,(map (lambda(ll) (rec-make-bookmark ll)) (cdr l))
-               )))
-   )
-  )
+    ((string? (cdr l))
+     `(a (@ (href ,(cdr l)))
+         (div (@ (class
+                  "bg-stone-700/75 p-2 h-min rounded-xl flex flex-wrap flex-row gap-3 items-center justify-center"))
+              (div (object (@ (class "max-w-12 max-h-12")
+                              (type "image/x-icon")
+                              (loading "lazy")
+                              (onerror "this.style.display='none'")
+                              (data ,(format #f "~a/favicon.ico"
+                                             (cdr l)))) "")
+                   (img (@ (class "max-w-12 max-h-12")
+                           (loading "lazy")
+                           (onerror "this.style.display='none'")
+                           (src ,(format #f "~a/favicon-16x16.png"
+                                         (cdr l))))))
+
+              (small ,(car l)))))
+    ((null? (cdr l))
+     `())
+    (else `(div (@ (class
+                    "flex flex-col gap-2 justify-center p-2 bg-stone-800/75 rounded-xl"))
+                (span (@ (class "text-xs font-bold text-stone-400"))
+                      ,(car l))
+                (div (@ (class "flex flex-row flex-wrap gap-4 justify-center"))
+                     ,(map (lambda (ll)
+                             (rec-make-bookmark ll))
+                           (cdr l)))))))
 
 (define (web-welkomscherm-main-body)
-  `((div (@ (class "flex flex-row flex-wrap gap-6 justify-center align-center items-center"))
-         ,(map (lambda (l) (rec-make-bookmark l)) web-welkomscherm-bookmarks))))
+  `((div (@ (class
+             "flex flex-row flex-wrap gap-6 justify-center align-center items-center"))
+         ,(map (lambda (l)
+                 (rec-make-bookmark l)) web-welkomscherm-bookmarks))))
 
 (define (web-welkomscherm-page)
   (with-output-to-string (lambda ()
                            (sxml->xml (web-welkomscherm-html-template #:title
-                                                                      "*welkomscherm*"
-                                                                      #:body (web-welkomscherm-main-body))))))
+                                       "*welkomscherm*"
+                                       #:body (web-welkomscherm-main-body))))))
 
 (define (main args)
   (display args)
