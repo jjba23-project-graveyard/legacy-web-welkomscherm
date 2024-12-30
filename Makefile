@@ -17,12 +17,12 @@
 
 define do-build
 	rm -rfv dist
-	mkdir dist
+	mkdir -v dist
 	GUILE_AUTOCOMPILE=0 guile web-welkomscherm.scm
 	cp -rfv resources/css dist/
 	cp -rfv resources/js dist/
 	cp -rfv resources/woff dist/
-	@printf "\n\nall tasks completed\n\n"
+	@printf "\n\nbuild completed\n\n"
 endef
 
 serve:
@@ -37,6 +37,7 @@ dev:
 fmt:
 	find . -maxdepth 4 -name "*.scm" -type f -exec guix style -f {} \;
 
-deploy: render
+deploy:
+	$(call do-build)
 	rm -rf /srv/http/jointhefreeworld.org/joe-web-welkomscherm
 	cp -rf dist /srv/http/jointhefreeworld.org/joe-web-welkomscherm
