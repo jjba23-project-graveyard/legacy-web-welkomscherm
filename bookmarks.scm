@@ -18,7 +18,7 @@
     ("Codeberg" . "https://codeberg.org")
     ("Woodpecker CI" . "https://ci.codeberg.org")
     ("Torrents" ("bt4gprx" . "https://bt4gprx.com"))
-    ("LocalDev" ("byggsteg" . "http://localhost:3000")
+    ("LocalDev" ("byggsteg" . "http://localhost:50002")
      ("lucidplan" . "http://localhost:50025/backlog/JOE")
      ("wikimusic-ssr" . "http://127.0.0.1:6923/"))))
 
