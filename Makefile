@@ -39,5 +39,5 @@ fmt:
 
 deploy:
 	$(call do-build)
-	rm -rf /srv/http/jointhefreeworld.org/joe-web-welkomscherm
-	cp -rf dist /srv/http/jointhefreeworld.org/joe-web-welkomscherm
+	rm -rfv /srv/http/jointhefreeworld.org/joe-web-welkomscherm
+	cp -rfv dist /srv/http/jointhefreeworld.org/joe-web-welkomscherm
